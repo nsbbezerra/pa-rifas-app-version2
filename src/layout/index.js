@@ -45,7 +45,10 @@ export default function Layout() {
               <ReceiptRefundIcon className="w-5 h-5" />
               <span className="font-bold ml-2 text-base">PEDIDOS</span>
             </button>
-            <button className="btn flex items-center text-green-500 w-full bg-white rounded-md px-2 py-1 hover:bg-gray-100 active:bg-white">
+            <button
+              className="btn flex items-center text-green-500 w-full bg-white rounded-md px-2 py-1 hover:bg-gray-100 active:bg-white"
+              onClick={() => navigate("/newraffle")}
+            >
               <SaveIcon className="w-5 h-5" />
               <span className="font-bold ml-2 text-base">CRIAR RIFA</span>
             </button>
