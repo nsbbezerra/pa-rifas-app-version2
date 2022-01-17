@@ -1,5 +1,14 @@
+import { MemoryRouter as Router } from "react-router-dom";
+import Layout from "./layout";
+
 function App() {
-  return <h1>PA RIFAS APP</h1>;
+  return (
+    <Router>
+      <div className="w-screen h-screen min-h-screen min-w-full">
+        <Layout />
+      </div>
+    </Router>
+  );
 }
 
 export default App;
