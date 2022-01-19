@@ -11,6 +11,10 @@ import { useParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import DialogApp from "../components/Dialog";
 import api from "../configs/axios";
+import DatePicker, { registerLocale } from "react-datepicker";
+import pt_br from "date-fns/locale/pt-BR";
+
+registerLocale("pt_br", pt_br);
 
 export default function NovaRifa() {
   const { r } = useParams();
@@ -18,10 +22,12 @@ export default function NovaRifa() {
   const [dialog, setDialog] = useState({});
   const [spinner, setSpinner] = useState(false);
   const [client, setClient] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const [name, setName] = useState("");
   const [qtd_numbers, setQtd_numbers] = useState("");
   const [raffle_value, setRaffle_value] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
   const [date, setDate] = useState("");
   const [schedule, setSchedule] = useState("");
   const [goal, setGoal] = useState("");
@@ -30,6 +36,21 @@ export default function NovaRifa() {
   const [trophy, setTrophy] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const [trophyName, setTrophyName] = useState("");
+
+  function clear() {
+    setName("");
+    setQtd_numbers("");
+    setRaffle_value("");
+    setStartDate(new Date());
+    setSchedule("");
+    setGoal("");
+    setDescription("");
+    setTrophy("");
+    setTrophys([]);
+    setThumbnail(null);
+    removeThumbnail();
+    setClient({});
+  }
 
   const previewThumbnail = useMemo(() => {
     return thumbnail ? URL.createObjectURL(thumbnail) : null;
@@ -84,6 +105,42 @@ export default function NovaRifa() {
   function removeTrophy(ind) {
     const tros = trophys.filter((obj) => obj !== ind);
     setTrophys(tros);
+  }
+
+  async function Save() {
+    if (!thumbnail) {
+      handleDialog(true, "Atenção", "Insira uma imagem", "warning");
+      return false;
+    }
+    if (trophys.length === 0) {
+      handleDialog(true, "Atenção", "Insira pelo menos um prêmio", "warning");
+      return false;
+    }
+    setLoading(true);
+
+    let data = new FormData();
+    data.append("name", name);
+    data.append("qtd_numbers", qtd_numbers);
+    data.append("draw_date", startDate);
+    data.append("client_id", client.id);
+    data.append("description", description);
+    data.append("raffle_value", raffle_value);
+    data.append("trophys", JSON.stringify(trophys));
+    data.append("goal", goal);
+    data.append("thumbnail", thumbnail);
+
+    try {
+      const response = await api.post(`/raffle/${r}`, data);
+      setLoading(false);
+      handleDialog(true, "Sucesso", response.data.message, "success");
+      clear();
+    } catch (error) {
+      setLoading(false);
+      const err =
+        error.response.data.message ||
+        "Ocorreu um erro ao processar a requisição";
+      handleDialog(true, "Ocorreu um erro", err, "error");
+    }
   }
 
   return (
@@ -160,7 +217,7 @@ export default function NovaRifa() {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-4 gap-5 mt-3">
+            <div className="grid grid-cols-3 gap-5 mt-3">
               <div className="w-full">
                 <label className="text-sm text-gray-700 mb-2 block">
                   Valor da Cota
@@ -175,26 +232,19 @@ export default function NovaRifa() {
               </div>
               <div className="w-full">
                 <label className="text-sm text-gray-700 mb-2 block">
-                  Data do Sorteio
+                  Sorteio Data e Hora -{" "}
+                  <strong className="text-xs">
+                    {date} às {schedule}
+                  </strong>
                 </label>
-                <InputMask
-                  mask={"99/99/9999"}
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
                   className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm px-3 py-2 text-left cursor-text focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                  placeholder="Data do Sorteio"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                />
-              </div>
-              <div className="w-full">
-                <label className="text-sm text-gray-700 mb-2 block">
-                  Hora do Sorteio
-                </label>
-                <InputMask
-                  className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm px-3 py-2 text-left cursor-text focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                  placeholder="Hora do Sorteio"
-                  mask={"99:99"}
-                  value={schedule}
-                  onChange={(e) => setSchedule(e.target.value)}
+                  locale="pt_br"
+                  dateFormat="dd/MM/yyyy 'às' hh:mm aa"
+                  showTimeSelect
+                  timeFormat="p"
                 />
               </div>
               <div className="w-full">
@@ -317,7 +367,12 @@ export default function NovaRifa() {
             </span>
 
             <div className="flex justify-end border-t mt-5 pt-5">
-              <Button size="lg" icon={<SaveIcon />}>
+              <Button
+                size="lg"
+                icon={<SaveIcon />}
+                loading={loading}
+                onClick={() => Save()}
+              >
                 CRIAR RIFA
               </Button>
             </div>
