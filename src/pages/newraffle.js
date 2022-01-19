@@ -1,9 +1,14 @@
 import Header from "../components/Header";
-import { PhotographIcon, PlusIcon, SaveIcon } from "@heroicons/react/outline";
+import {
+  PhotographIcon,
+  PlusIcon,
+  SaveIcon,
+  TrashIcon,
+} from "@heroicons/react/outline";
 import InputMask from "react-input-mask";
 import Button from "../components/Button";
 
-export default function NovaRifa() {
+export default function NovaRifaNoParams() {
   return (
     <>
       <Header icon={<SaveIcon />} title={"CRIAR RIFA"} />
@@ -144,6 +149,53 @@ export default function NovaRifa() {
                 >
                   Adicionar
                 </Button>
+              </div>
+              <div className="grid col-span-3 grid-cols-3 gap-5">
+                <div className="bg-gray-200 rounded-md p-2 flex justify-between items-center h-fit text-sm">
+                  <div className="w-full">
+                    <span className="block font-semibold">1º Prêmio</span>
+                    <span className="block">PIX DE 3000 MIL</span>
+                  </div>
+                  <button className="btn bg-red-500 rounded-full p-2 cursor-pointer ml-2 hover:bg-red-600 active:bg-red-500 shadow-sm">
+                    <TrashIcon className="w-4 h-4 text-gray-100" />
+                  </button>
+                </div>
+                <div className="bg-gray-200 rounded-md p-2 flex justify-between items-center h-fit text-sm">
+                  <div className="w-full">
+                    <span className="block font-semibold">1º Prêmio</span>
+                    <span className="block">PIX DE 3000 MIL</span>
+                  </div>
+                  <button className="btn bg-red-500 rounded-full p-2 cursor-pointer ml-2 hover:bg-red-600 active:bg-red-500 shadow-sm">
+                    <TrashIcon className="w-4 h-4 text-gray-100" />
+                  </button>
+                </div>
+                <div className="bg-gray-200 rounded-md p-2 flex justify-between items-center h-fit text-sm">
+                  <div className="w-full">
+                    <span className="block font-semibold">1º Prêmio</span>
+                    <span className="block">PIX DE 3000 MIL</span>
+                  </div>
+                  <button className="btn bg-red-500 rounded-full p-2 cursor-pointer ml-2 hover:bg-red-600 active:bg-red-500 shadow-sm">
+                    <TrashIcon className="w-4 h-4 text-gray-100" />
+                  </button>
+                </div>
+                <div className="bg-gray-200 rounded-md p-2 flex justify-between items-center h-fit text-sm">
+                  <div className="w-full">
+                    <span className="block font-semibold">1º Prêmio</span>
+                    <span className="block">PIX DE 3000 MIL</span>
+                  </div>
+                  <button className="btn bg-red-500 rounded-full p-2 cursor-pointer ml-2 hover:bg-red-600 active:bg-red-500 shadow-sm">
+                    <TrashIcon className="w-4 h-4 text-gray-100" />
+                  </button>
+                </div>
+                <div className="bg-gray-200 rounded-md p-2 flex justify-between items-center h-fit text-sm">
+                  <div className="w-full">
+                    <span className="block font-semibold">1º Prêmio</span>
+                    <span className="block">PIX DE 3000 MIL</span>
+                  </div>
+                  <button className="btn bg-red-500 rounded-full p-2 cursor-pointer ml-2 hover:bg-red-600 active:bg-red-500 shadow-sm">
+                    <TrashIcon className="w-4 h-4 text-gray-100" />
+                  </button>
+                </div>
               </div>
             </div>
 

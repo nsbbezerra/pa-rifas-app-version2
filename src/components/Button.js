@@ -13,7 +13,10 @@ export default function Button({
   return (
     <button
       className={`btn ${
-        scheme === "green" ? "bg-green-500" : "bg-orange-500"
+        (scheme === "green" && "bg-green-500") ||
+        (scheme === "orange" && "bg-orange-500") ||
+        (scheme === "red" && "bg-red-600") ||
+        (scheme === "blue" && "bg-blue-600")
       } text-white ${
         (size === "xs" && "px-2 py-1 text-xs") ||
         (size === "sm" && "px-3 py-2 text-sm") ||
@@ -21,7 +24,12 @@ export default function Button({
         (size === "lg" && "px-5 py-3 text-lg")
       } rounded-md flex justify-center items-center ${
         full ? "w-full" : "w-fit"
-      } ${scheme === "green" ? "hover:bg-green-600" : "hover:bg-orange-600"} ${
+      } ${
+        (scheme === "green" && "hover:bg-green-600") ||
+        (scheme === "orange" && "hover:bg-orange-600") ||
+        (scheme === "red" && "hover:bg-red-700") ||
+        (scheme === "blue" && "hover:bg-blue-700")
+      } ${
         (spacing === "none" && "my-0") ||
         (spacing === "sm" && "my-3") ||
         (spacing === "md" && "my-5") ||
@@ -29,15 +37,27 @@ export default function Button({
       } ${
         loading &&
         `cursor-not-allowed opacity-60 hover:${
-          scheme === "green" ? "bg-green-500" : "bg-orange-500"
+          (scheme === "green" && "bg-green-500") ||
+          (scheme === "orange" && "bg-orange-500") ||
+          (scheme === "red" && "bg-red-600") ||
+          (scheme === "blue" && "bg-blue-600")
         }`
       } ${
         disabled &&
         `cursor-not-allowed opacity-60 hover:${
-          scheme === "green" ? "bg-green-500" : "bg-orange-500"
+          (scheme === "green" && "bg-green-500") ||
+          (scheme === "orange" && "bg-orange-500") ||
+          (scheme === "red" && "bg-red-600") ||
+          (scheme === "blue" && "bg-blue-600")
         }`
-      } ${scheme === "green" ? "active:bg-green-500" : "active:bg-orange-500"}`}
+      } ${
+        (scheme === "green" && "active:bg-green-500") ||
+        (scheme === "orange" && "active:bg-orange-500") ||
+        (scheme === "red" && "active:bg-red-600") ||
+        (scheme === "blue" && "active:bg-blue-600")
+      }`}
       {...rest}
+      onClick={onClick}
     >
       {icon ? (
         <div

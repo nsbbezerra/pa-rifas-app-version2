@@ -11,10 +11,10 @@ import {
 import { Fragment } from "react";
 import Logo from "../assets/logo.png";
 import Routing from "../routes";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function Layout() {
-  const navigate = useNavigate();
+  const { push } = useHistory();
 
   return (
     <Fragment>
@@ -33,21 +33,21 @@ export default function Layout() {
           <div className="flex flex-col w-full mt-16 px-3 gap-3">
             <button
               className="btn flex items-center text-green-500 w-full bg-white rounded-md px-2 py-1 hover:bg-gray-100 active:bg-white"
-              onClick={() => navigate("/")}
+              onClick={() => push("/")}
             >
               <HomeIcon className="w-5 h-5" />
               <span className="font-bold ml-2 text-base">INÍCIO</span>
             </button>
             <button
               className="btn flex items-center text-green-500 w-full bg-white rounded-md px-2 py-1 hover:bg-gray-100 active:bg-white"
-              onClick={() => navigate("/petitions")}
+              onClick={() => push("/petitions")}
             >
               <ReceiptRefundIcon className="w-5 h-5" />
               <span className="font-bold ml-2 text-base">PEDIDOS</span>
             </button>
             <button
               className="btn flex items-center text-green-500 w-full bg-white rounded-md px-2 py-1 hover:bg-gray-100 active:bg-white"
-              onClick={() => navigate("/newraffle")}
+              onClick={() => push("/newraffle")}
             >
               <SaveIcon className="w-5 h-5" />
               <span className="font-bold ml-2 text-base">CRIAR RIFA</span>
