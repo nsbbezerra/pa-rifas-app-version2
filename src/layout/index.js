@@ -42,17 +42,13 @@ export default function Layout() {
               className="btn flex items-center text-green-500 w-full bg-white rounded-md px-2 py-1 hover:bg-gray-100 active:bg-white"
               onClick={() => push("/petitions")}
             >
-              <ReceiptRefundIcon className="w-5 h-5" />
-              <span className="font-bold ml-2 text-base">PEDIDOS</span>
+              <SaveIcon className="w-5 h-5" />
+              <span className="font-bold ml-2 text-base">NOVA RIFA</span>
             </button>
             <button
               className="btn flex items-center text-green-500 w-full bg-white rounded-md px-2 py-1 hover:bg-gray-100 active:bg-white"
-              onClick={() => push("/newraffle")}
+              onClick={() => push("/raffles")}
             >
-              <SaveIcon className="w-5 h-5" />
-              <span className="font-bold ml-2 text-base">CRIAR RIFA</span>
-            </button>
-            <button className="btn flex items-center text-green-500 w-full bg-white rounded-md px-2 py-1 hover:bg-gray-100 active:bg-white">
               <DocumentTextIcon className="w-5 h-5" />
               <span className="font-bold ml-2 text-base">RIFAS</span>
             </button>
